@@ -30,7 +30,7 @@ public class OrderController {
 
     }
 
-    @PostMapping("/update")
+    @PutMapping("/update")
     public ResponseEntity<Order> updateOrder(@RequestBody Order order) throws ProductNotAvailableException,
             ProductEfficiencyException, RateExceedException, HolidayException {
 
