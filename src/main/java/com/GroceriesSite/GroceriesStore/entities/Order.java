@@ -3,10 +3,11 @@ package com.GroceriesSite.GroceriesStore.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
-@Data
 @NoArgsConstructor
 @Getter
 @Setter
@@ -15,14 +16,16 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NonNull
 
+
+    @NotNull(message = "id can not be null")
     private Long productId;
-    @NonNull
+    @NotNull(message = "product quantity can not be null")
     private Long productQuantity;
-    @NonNull
+
+    @NotBlank(message="Product name should not be blank")
     private String productName;
-    @NonNull
+    @NotNull(message = "date can not be null")
     private LocalDate orderDate;
 
 
