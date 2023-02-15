@@ -10,20 +10,24 @@ import com.GroceriesSite.GroceriesStore.service.OrderServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+
 
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
 @RequestMapping("/coder")
+@Validated
 public class OrderController {
 
     @Autowired
     private OrderServiceInterface orderServiceInterface;
 
     @PostMapping("/save")
-    public ResponseEntity<Order> addOrder(@Valid @RequestBody Order order) throws ProductNotAvailableException,
+    public ResponseEntity<Order> addOrder( @Valid @RequestBody  Order order) throws ProductNotAvailableException,
             ProductEfficiencyException, RateExceedException, HolidayException {
 
         Order savedOrder=orderServiceInterface.addOrder(order);
