@@ -51,6 +51,7 @@ public class OrderService implements OrderServiceInterface{
             {
                 //checking if demand of product is higher than availability
                 String msg="Sorry only "+orderItem.getAvailableQuantity()+"  "+order.getProductName()+" available";
+                totalRate=0l;
                 throw new ProductEfficiencyException(msg);
             }
             else if(!(totalRate>99&&totalRate<4999))
