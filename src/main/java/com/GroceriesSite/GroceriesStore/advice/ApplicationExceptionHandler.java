@@ -1,9 +1,6 @@
 package com.GroceriesSite.GroceriesStore.advice;
 
-import com.GroceriesSite.GroceriesStore.exception.HolidayException;
-import com.GroceriesSite.GroceriesStore.exception.ProductEfficiencyException;
-import com.GroceriesSite.GroceriesStore.exception.ProductNotAvailableException;
-import com.GroceriesSite.GroceriesStore.exception.RateExceedException;
+import com.GroceriesSite.GroceriesStore.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -14,7 +11,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestControllerAdvice
-public class ApplicationExceptionHandler {
+public class
+ApplicationExceptionHandler {
 
     private String error;
 
@@ -68,5 +66,38 @@ public class ApplicationExceptionHandler {
         return errorMap;
 
     }
+
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(OfferNotAvailableException.class)
+    public Map<String,String> handleException5(OfferNotAvailableException ex)
+    {
+        Map<String,String> errorMap=new HashMap<>();
+        errorMap.put("errorMessage",ex.getMessage());
+        return errorMap;
+
+    }
+
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(OfferExpiredException.class)
+    public Map<String,String> handleException5(OfferExpiredException ex)
+    {
+        Map<String,String> errorMap=new HashMap<>();
+        errorMap.put("errorMessage",ex.getMessage());
+        return errorMap;
+
+    }
+
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(OfferNotApplicableException.class)
+    public Map<String,String> handleException5(OfferNotApplicableException ex)
+    {
+        Map<String,String> errorMap=new HashMap<>();
+        errorMap.put("errorMessage",ex.getMessage());
+        return errorMap;
+
+    }
+
+
+
 
 }

@@ -7,6 +7,7 @@ import javax.persistence.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
@@ -18,10 +19,7 @@ import java.time.LocalDate;
 public class Order {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-
-    @NotNull(message = "id can not be null")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long productId;
     @NotNull(message = "product quantity can not be null")
     private Long productQuantity;
@@ -30,6 +28,10 @@ public class Order {
     private String productName;
     @NotNull(message = "date can not be null")
     private LocalDate orderDate;
+
+    private Long offerId;
+
+    private BigDecimal orderAmount;
 
 
 

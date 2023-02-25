@@ -15,7 +15,7 @@ import java.util.function.Function;
 public class JwtUtil {
 
     private  static final long serialVersionUID=-2550185165626007488L;
-    private String SECRET_KEY = "kajal@143";
+    private String SECRET_KEY = "java@123";
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);

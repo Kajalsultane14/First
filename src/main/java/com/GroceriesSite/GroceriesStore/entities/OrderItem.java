@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
+import java.math.BigDecimal;
 
 @Entity
 @Getter
@@ -15,11 +15,10 @@ import javax.validation.constraints.NotBlank;
 public class OrderItem {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long productId;
-    @NotBlank(message = "can not be blank")
     private String productName;
-    private Long rate;
+    private BigDecimal rate;
     private Integer availableQuantity;
 
 

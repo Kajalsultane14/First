@@ -2,16 +2,17 @@ package com.GroceriesSite.GroceriesStore.controller;
 
 import com.GroceriesSite.GroceriesStore.entities.Order;
 import com.GroceriesSite.GroceriesStore.entities.OrderItem;
-import com.GroceriesSite.GroceriesStore.exception.HolidayException;
-import com.GroceriesSite.GroceriesStore.exception.ProductEfficiencyException;
-import com.GroceriesSite.GroceriesStore.exception.ProductNotAvailableException;
-import com.GroceriesSite.GroceriesStore.exception.RateExceedException;
-import com.GroceriesSite.GroceriesStore.service.OrderServiceInterface;
+import com.GroceriesSite.GroceriesStore.exception.*;
+import com.GroceriesSite.GroceriesStore.model.OrderItemRequest;
+import com.GroceriesSite.GroceriesStore.model.OrderItemResponse;
+import com.GroceriesSite.GroceriesStore.model.OrderRequest;
+import com.GroceriesSite.GroceriesStore.model.OrderResponse;
+import com.GroceriesSite.GroceriesStore.service.OrderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -24,39 +25,42 @@ import java.util.List;
 public class OrderController {
 
     @Autowired
-    private OrderServiceInterface orderServiceInterface;
+    private OrderServiceImpl orderServiceInterface;
+
+    @Autowired
+    private Jackson2ObjectMapperBuilder jackson2ObjectMapperBuilder;
 
     @PostMapping("/save")
-    public ResponseEntity<Order> addOrder( @Valid @RequestBody  Order order) throws ProductNotAvailableException,
-            ProductEfficiencyException, RateExceedException, HolidayException {
+    public ResponseEntity<OrderResponse> addOrder(@Valid @RequestBody OrderRequest orderRequest) throws ProductNotAvailableException,
+            ProductEfficiencyException, RateExceedException, HolidayException, OfferNotAvailableException, OfferExpiredException, OfferNotApplicableException {
 
-        Order savedOrder=orderServiceInterface.addOrder(order);
-        return new ResponseEntity<Order>(savedOrder, HttpStatus.CREATED);
+        OrderResponse savedOrder=orderServiceInterface.addOrder(orderRequest);
+        return new ResponseEntity<OrderResponse>(savedOrder, HttpStatus.CREATED);
 
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Order> updateOrder(@Valid @RequestBody Order order) throws ProductNotAvailableException,
-            ProductEfficiencyException, RateExceedException, HolidayException {
+    public ResponseEntity<OrderResponse> updateOrder(@Valid @RequestBody OrderRequest orderRequest) throws ProductNotAvailableException,
+            ProductEfficiencyException, RateExceedException, HolidayException, OfferNotAvailableException, OfferExpiredException, OfferNotApplicableException {
 
-        Order savedOrder=orderServiceInterface.addOrder(order);
-        return new ResponseEntity<Order>(savedOrder, HttpStatus.CREATED);
+        OrderResponse savedOrder=orderServiceInterface.addOrder(orderRequest);
+        return new ResponseEntity<OrderResponse>(savedOrder, HttpStatus.CREATED);
 
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Order>> getAllOrder(@RequestBody Order order)
+    public ResponseEntity<List<OrderResponse>> getAllOrder(@RequestBody OrderRequest orderRequest)
     {
-        List<Order> listOfAllOrders=orderServiceInterface.getAllOrder();
-        return new ResponseEntity<List<Order>>(listOfAllOrders,HttpStatus.OK);
+        List<OrderResponse> listOfAllOrders=orderServiceInterface.getAllOrder();
+        return new ResponseEntity<List<OrderResponse>>(listOfAllOrders,HttpStatus.OK);
     }
 
 
     @GetMapping("/order/{id}")
-    public ResponseEntity<Order> getOrderItemById(@PathVariable Long id,@RequestBody Order order)
+    public ResponseEntity<OrderResponse> getOrderItemById(@PathVariable Long id,@RequestBody Order order)
     {
-        Order Order=orderServiceInterface.getOrderById(id);
-        return new ResponseEntity<Order>(Order,HttpStatus.OK);
+        OrderResponse orderResponse=orderServiceInterface.getOrderById(id);
+        return new ResponseEntity<OrderResponse>(orderResponse,HttpStatus.OK);
     }
 
     @PostMapping("/saveitem")
@@ -69,17 +73,17 @@ public class OrderController {
     }
 
     @GetMapping("/allitem")
-    public ResponseEntity<List<OrderItem>> getAllOrderItem(@RequestBody OrderItem orderItem)
+    public ResponseEntity<List<OrderItemResponse>> getAllOrderItem(@RequestBody OrderItemRequest orderItemRequest)
     {
-        List<OrderItem> listOfAllOrderItem=orderServiceInterface.getAllOrderItem();
-        return new ResponseEntity<List<OrderItem>>(listOfAllOrderItem,HttpStatus.OK);
+        List<OrderItemResponse> listOfAllOrderItem=orderServiceInterface.getAllOrderItem();
+        return new ResponseEntity<List<OrderItemResponse>>(listOfAllOrderItem,HttpStatus.OK);
     }
 
     @GetMapping("/item/{id}")
-    public ResponseEntity<OrderItem> getOrderItemById(@PathVariable Long id,@RequestBody OrderItem orderItem)
+    public ResponseEntity<OrderItemResponse> getOrderItemById(@PathVariable Long id, @RequestBody OrderItemRequest orderItemRequest)
     {
-        OrderItem OrderItem=orderServiceInterface.getOrderItemById(id);
-        return new ResponseEntity<OrderItem>(OrderItem,HttpStatus.OK);
+        OrderItemResponse orderItemResponse=orderServiceInterface.getOrderItemById(id);
+        return new ResponseEntity<OrderItemResponse>(orderItemResponse,HttpStatus.OK);
     }
 
 

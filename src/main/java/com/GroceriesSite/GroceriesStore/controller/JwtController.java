@@ -47,7 +47,6 @@ public class JwtController {
 
         }
 
-
         UserDetails userDetails=this.customUserDetailsService.loadUserByUsername(jwtRequest.getUsername());
         String token=this.jwtUtil.generateToken(userDetails);
         System.out.println("JWT"+token);
