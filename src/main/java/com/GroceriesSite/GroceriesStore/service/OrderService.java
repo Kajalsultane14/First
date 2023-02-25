@@ -61,7 +61,6 @@ public class OrderService implements OrderServiceImpl {
             }
 
             OrderItemResponse orderItemResponse= getOrderItemById(orderRequest.getProductId());
-            // totalRate=totalRate+(orderItem.getRate()*order.getProductQuantity());
 
             if(orderItemResponse.getAvailableQuantity()<orderRequest.getProductQuantity())
             {
