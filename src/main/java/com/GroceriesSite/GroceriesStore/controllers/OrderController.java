@@ -1,7 +1,5 @@
 package com.GroceriesSite.GroceriesStore.controllers;
 
-import com.GroceriesSite.GroceriesStore.entities.Order;
-import com.GroceriesSite.GroceriesStore.entities.OrderItem;
 import com.GroceriesSite.GroceriesStore.exceptions.*;
 import com.GroceriesSite.GroceriesStore.models.OrderItemRequest;
 import com.GroceriesSite.GroceriesStore.models.OrderItemResponse;

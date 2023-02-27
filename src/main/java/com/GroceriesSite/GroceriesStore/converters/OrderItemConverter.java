@@ -1,10 +1,8 @@
 package com.GroceriesSite.GroceriesStore.converters;
 
-import com.GroceriesSite.GroceriesStore.entities.Order;
 import com.GroceriesSite.GroceriesStore.entities.OrderItem;
 import com.GroceriesSite.GroceriesStore.models.OrderItemRequest;
 import com.GroceriesSite.GroceriesStore.models.OrderItemResponse;
-import com.GroceriesSite.GroceriesStore.models.OrderResponse;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
