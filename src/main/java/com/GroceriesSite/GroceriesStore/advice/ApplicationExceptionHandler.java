@@ -1,6 +1,6 @@
 package com.GroceriesSite.GroceriesStore.advice;
 
-import com.GroceriesSite.GroceriesStore.exception.*;
+import com.GroceriesSite.GroceriesStore.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
